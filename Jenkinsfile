@@ -23,7 +23,7 @@ stage('Update ES Health') {
     def dateSuffix = new Date().format( 'yyyy-MM' )
     def esIndex = "es-health-$dateSuffix"
     def indexUrl = "${esHost}/${esIndex}/health/"
-    def indexResp = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'PUT', requestBody: respObj, authentication: "es-auth", url: "$url", validResponseCodes: '100:500'
+    def indexResp = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'PUT', requestBody: "$respObj", authentication: "es-auth", url: "$url", validResponseCodes: '100:500'
     def indeRrespObj = jsonParse(indexResp.content)
     println "es health index resp: ${indeRrespObj}"
   }
