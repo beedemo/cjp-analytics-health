@@ -10,7 +10,7 @@ stage('Update ES Health') {
   def sysEnv = System.getenv()
   node('docker') {
     def url = "${sysEnv.ES_HOST}/_cluster/health"
-    def resp = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'GET', authentication: "$esHttpReqAuthId", url: "$url", validResponseCodes: '100:500'
+    def resp = httpRequest acceptType: 'APPLICATION_JSON', httpMode: 'GET', authentication: "$esHttpReqAuthId", url: "$url", validResponseCodes: '100:500'
     def respObj = jsonParse(resp.content)
     println "es resp: ${respObj}"
     
