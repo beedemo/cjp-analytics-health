@@ -14,10 +14,10 @@ def getEsHost() {
 stage('Update ES Health') {
   def esHost = getEsHost()
   node('docker') {
-    def url = "${esHost}/_cluster/health"
+    def url = "${esHost}/_cluster/health?pretty=true"
     def resp = httpRequest acceptType: 'APPLICATION_JSON', httpMode: 'GET', authentication: "es-auth", url: "$url", validResponseCodes: '100:500'
     def respObj = jsonParse(resp.content)
-    println "es resp: ${respObj}"
+    println "es resp: ${resp.content}"
     
     //set up path for index
     def dateSuffix = new Date().format( 'yyyy-MM' )
