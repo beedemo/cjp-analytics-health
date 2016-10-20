@@ -25,8 +25,8 @@ stage('Update ES Health') {
       {
         "cluster_name":"$respObj.cluster_name",
         "status":"$respObj.status",
-        "number_of_nodes":"$respObj.number_of_nodes",
-        "number_of_data_nodes":"$respObj.number_of_data_nodes",
+        "number_of_nodes":$respObj.number_of_nodes,
+        "number_of_data_nodes":$respObj.number_of_data_nodes,
         "@timestamp": "$timestamp"
       }
     """
