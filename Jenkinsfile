@@ -10,7 +10,8 @@ def jsonParse(def json) {
 def getEsHost() {
     return System.getenv().ES_HOST   
 }
-
+//configure to run every 15 minutes and only keep last 5 builds
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5')), pipelineTriggers([cron('H/15 * * * *')])])
 stage('Update ES Health') {
   def esHost = getEsHost()
   node('docker') {
